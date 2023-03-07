@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const FormControlContainer = styled.section<{ height?: string }>`
   width: 100%;
@@ -23,7 +23,6 @@ export const FormControlContainer = styled.section<{ height?: string }>`
   }
 
   .label {
-    color: #fff;
     font-weight: 400;
     font-size: 1rem;
     line-height: 1.4375em;
@@ -37,10 +36,10 @@ export const FormControlContainer = styled.section<{ height?: string }>`
     text-overflow: ellipsis;
     max-width: calc(100% - 24px);
     position: absolute;
-    right: 8px;
+    left: 8px;
     top: -10px;
     font-size: 14px;
-    color: rgba(148, 148, 148, 1);
+    color: #1c1b1f;
     z-index: 1;
     pointer-events: auto;
     font-size: 0.85em;
@@ -61,7 +60,7 @@ export const FormControlContainer = styled.section<{ height?: string }>`
     position: relative;
     width: 100%;
     border-radius: 8px;
-    height: ${props => props.height};
+    height: ${(props) => props.height};
 
     .icon span {
       font-size: 21px;
@@ -71,7 +70,7 @@ export const FormControlContainer = styled.section<{ height?: string }>`
   }
 
   fieldset {
-    text-align: right;
+    text-align: left;
     position: absolute;
     bottom: 0;
     right: 0;
@@ -101,4 +100,4 @@ export const FormControlContainer = styled.section<{ height?: string }>`
     white-space: nowrap;
     color: rgba(148, 148, 148, 1);
   }
-`
+`;

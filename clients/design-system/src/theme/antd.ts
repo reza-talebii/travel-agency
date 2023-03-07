@@ -17,4 +17,7 @@ export const antdThemeComponents: OverrideToken = {
     colorBgContainerDisabled: "#D2D1D3",
     colorTextDisabled: "#8F8C91",
   },
+  Select: {
+    colorBgContainer: "transparent",
+  },
 };
