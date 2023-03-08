@@ -1,0 +1,8 @@
+@font-face {
+  font-family: TradeGothicLTRegular;
+  src: url('/assets/fonts/TradeGothicLTRegular.ttf');
+}
+
+.fontTradeGothicL {
+  font-family: TradeGothicLTRegular;
+}
