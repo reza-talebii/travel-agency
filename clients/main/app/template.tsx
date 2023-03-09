@@ -1,4 +1,4 @@
-import MainLayout from '@/layout'
+import MainLayout from '@/layout/main'
 import { FC, ReactNode } from 'react'
 
 const Page: FC<{ children: ReactNode }> = ({ children }) => {
