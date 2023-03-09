@@ -1,7 +1,8 @@
 import React from 'react'
+import SignUp from '@/modules/SignUp'
 
 const index = () => {
-  return <div>sign in</div>
+  return <SignUp />
 }
 
 export default index

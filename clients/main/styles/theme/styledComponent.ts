@@ -2,7 +2,7 @@ import { DefaultTheme } from 'styled-components'
 const styledComponentsTheme: DefaultTheme = {
   colors: {
     primary: '#51c19a',
-    secondary: '#23272E',
+    secondary: '#112211',
     darkGreen: '#202C2D',
     gray: '#4A4B4F',
     error: '#A61D24',

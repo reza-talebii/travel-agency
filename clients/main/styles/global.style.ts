@@ -10,10 +10,9 @@ export const GlobalStyle = createGlobalStyle`
 body{
   background: #ffffff;
 }
-body,h1,h2,h3,h4,h5,h6,div,p,strong,button,select,textarea,label,input,input::placeholder,span:not(.material-icons){
+/* body,h1,h2,h3,h4,h5,h6,div,p,strong,button,select,textarea,label,input,input::placeholder,span:not(.material-icons){
   font-family: TradeGothicLTRegular !important;
-
-}
+} */
 
 
 /* width */
@@ -46,6 +45,17 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type="number"] {
   -moz-appearance: textfield;
+}
+
+button, [type="button"], [type="reset"], [type="submit"] {
+    appearance: button;
+    background-color:${props => props.theme.colors.primary} !important;
+    background-image: inherit;
+}
+
+.ant-divider-inner-text{
+  color: #afafaf;
+  font-size: 14px;
 }
 
 `

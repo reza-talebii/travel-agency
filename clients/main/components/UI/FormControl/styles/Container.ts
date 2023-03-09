@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const FormControlContainer = styled.section<{ height?: string }>`
   width: 100%;
@@ -36,7 +36,7 @@ export const FormControlContainer = styled.section<{ height?: string }>`
     text-overflow: ellipsis;
     max-width: calc(100% - 24px);
     position: absolute;
-    left: 8px;
+    left: 15px;
     top: -10px;
     font-size: 14px;
     color: #1c1b1f;
@@ -59,8 +59,8 @@ export const FormControlContainer = styled.section<{ height?: string }>`
     align-items: center;
     position: relative;
     width: 100%;
-    border-radius: 8px;
-    height: ${(props) => props.height};
+    border-radius: 4px;
+    height: ${props => props.height};
 
     .icon span {
       font-size: 21px;
@@ -100,4 +100,4 @@ export const FormControlContainer = styled.section<{ height?: string }>`
     white-space: nowrap;
     color: rgba(148, 148, 148, 1);
   }
-`;
+`

@@ -1,10 +1,14 @@
-import { Input } from "antd";
-import styled from "styled-components";
+import { Input } from 'antd'
+import styled from 'styled-components'
 
 export const InputPasswordStyled = styled(Input.Password)`
   box-sizing: content-box;
   background: none;
   border: none !important;
+
+  .ant-input-suffix {
+    color: #fff;
+  }
 
   .ant-input {
     font: inherit;
@@ -44,4 +48,4 @@ export const InputPasswordStyled = styled(Input.Password)`
     box-shadow: none !important;
     display: none;
   }
-`;
+`
