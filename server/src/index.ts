@@ -4,7 +4,8 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import http from "http";
 import bodyParser from "body-parser";
-const mongoose = require("mongoose");
+import router from "./router";
+import mongoose from "mongoose";
 
 const app = express();
 
@@ -29,5 +30,11 @@ const MONGO_URL =
   "mongodb+srv://reza_talebii:reza123456@cluster0.uqazw.mongodb.net/?retryWrites=true&w=majority";
 
 mongoose.Promise = Promise;
-mongoose.connect(MONGO_URL, { useNewUrlParser: true });
+mongoose.connect(MONGO_URL);
 mongoose.connection.on("error", (error: Error) => console.log(error));
+
+export default (router: express.Router) => {
+  router.post("/auth/register", register);
+};
+
+app.use("/", router());
