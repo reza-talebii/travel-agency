@@ -6,10 +6,6 @@ export const InputPasswordStyled = styled(Input.Password)`
   background: none;
   border: none !important;
 
-  .ant-input-suffix {
-    color: #fff;
-  }
-
   .ant-input {
     font: inherit;
     letter-spacing: inherit;
@@ -26,6 +22,10 @@ export const InputPasswordStyled = styled(Input.Password)`
 
     .ant-input-suffix {
       font-size: 16px;
+    }
+
+    .ant-input-password-icon {
+      color: ${props => props.theme.colors.secondary};
     }
 
     &:focus {

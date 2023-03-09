@@ -5,7 +5,8 @@ export const CarouselIdentityWarper = styled.section`
   height: 100%;
 
   .ant-carousel {
-    width: 450px;
+    width: 100%;
+
     height: 100%;
     margin-left: auto;
   }

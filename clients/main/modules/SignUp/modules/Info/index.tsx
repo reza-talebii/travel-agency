@@ -1,14 +1,25 @@
 import React from 'react'
-import { Button, Checkbox, Divider, Form, Row, Space, Typography } from 'antd'
+import { Checkbox, Divider, Form, Typography } from 'antd'
 import WrapperSignUpInfo from './styles/Wrapper'
 import InputUi from '@/components/UI/Input'
 import FormUi from '@/components/UI/Form'
 import InputPassword from '@/components/UI/InputPassword'
 import ButtonUi from '@/components/UI/Button'
 import Link from 'next/link'
-import SignUpProviders from './components/SignProviders'
+import { emailValidator } from '@/helper'
+
+interface IFormValues {
+  TermsPrivacy: boolean
+  confirmPassword: string
+  emailOrPhone: string
+  password: string
+}
 
 const SignUpInfo = () => {
+  const onCreateAccount = (values: IFormValues) => {
+    console.log(values)
+  }
+
   return (
     <WrapperSignUpInfo>
       <section>
@@ -18,19 +29,21 @@ const SignUpInfo = () => {
         <Typography.Text className="subTitle">Let’s get you all st up so you can access your personal account.</Typography.Text>
       </section>
 
-      <FormUi>
-        <Form.Item name={'emailOrPhone'}>
-          <InputUi label="Email/Phone" />
+      <FormUi onFinish={onCreateAccount} className="flex flex-col gap-2">
+        <Form.Item name={'email'} rules={[{ required: true }, emailValidator]}>
+          <InputUi label="Email" />
         </Form.Item>
-        <Form.Item name={'password'}>
+        <Form.Item name={'password'} rules={[{ required: true }]}>
           <InputPassword label="Password" />
         </Form.Item>
-        <Form.Item name={'confirmPassword'}>
+        <Form.Item name={'confirmPassword'} rules={[{ required: true }]}>
           <InputPassword label="Confirm Password" />
         </Form.Item>
 
-        <Form.Item name={'TermsPrivacy'}>
-          <Checkbox>I agree to all the Terms and Privacy Policies</Checkbox>
+        <Form.Item name={'TermsPrivacy'} rules={[{ required: true }]} valuePropName="checked">
+          <Checkbox>
+            I agree to all the <span className="!text-[#FF8682]">Terms</span> and <span className="!text-[#FF8682] ">Privacy Policies</span>
+          </Checkbox>
         </Form.Item>
 
         <ButtonUi htmlType="submit" className="w-full h-[48px]">
@@ -46,7 +59,6 @@ const SignUpInfo = () => {
       </FormUi>
 
       <Divider className="!my-0 ">Or Sign up with</Divider>
-      <SignUpProviders />
     </WrapperSignUpInfo>
   )
 }

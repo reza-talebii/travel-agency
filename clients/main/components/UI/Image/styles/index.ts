@@ -5,6 +5,6 @@ type IPropsStyled = Pick<IPropsImageUiKit, 'height' | 'width'>
 
 export const ImageUiKitContainer = styled.section<IPropsStyled>`
   position: relative;
-  width: ${props => props.width}px;
-  height: ${props => props.height}px;
+  width: ${props => props.width};
+  height: ${props => props.height};
 `
