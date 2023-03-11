@@ -1,13 +1,17 @@
 'use client'
 
 import ImageUi from '@/components/UI/Image'
+import { USER_JWT_TOKEN } from '@/constants'
 import { Col, Layout, Row } from 'antd'
 import Image from 'next/image'
-import React, { FC, ReactNode } from 'react'
+import { useRouter } from 'next/router'
+import React, { FC, ReactNode, useEffect } from 'react'
 import { CarouselIdentity } from './modules'
 import { IdentityWarper } from './styles'
 
 const IdentityLayout: FC<{ children: ReactNode }> = ({ children }) => {
+ 
+
   return (
     <Layout>
       <IdentityWarper>

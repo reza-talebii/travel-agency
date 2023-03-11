@@ -1,14 +1,31 @@
-import { AxiosRequestConfig, AxiosResponse } from 'axios'
+import { message } from 'antd'
+import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
 import { axiosInstance } from './axiosInstance'
 
-const checkStatus = (response: AxiosResponse) => {
-  if (response.status >= 200 && response.status < 300) {
-    return response.data
-  }
-  throw new Error(`HTTP Error ${response.status}`)
-}
+axiosInstance.interceptors.response.use(
+  (response: AxiosResponse) => {
+    if (response.status >= 200 && response.status < 300) {
+      return response.data
+    }
+    return response
+  },
+  (error: AxiosError<{ message: string }>) => {
+    if (error.response?.status === 401) {
+      localStorage.removeItem('token')
+      window.location.pathname = '/login'
+    }
+    if (error.response?.status === 400) message.error(error?.response?.data?.message!)
 
-axiosInstance.interceptors.response.use(checkStatus)
+    return Promise.reject(error)
+  },
+)
+axiosInstance.interceptors.request.use(
+  config => {
+    config.baseURL = process.env.NEXT_PUBLIC_BASE_URL_API
+    return config
+  },
+  error => Promise.reject(error),
+)
 
 export const apiCaller = {
   get: async <T>(url: string, config?: AxiosRequestConfig<unknown>) => await axiosInstance.get<T>(url, config),
