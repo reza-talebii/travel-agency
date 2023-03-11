@@ -11,17 +11,19 @@ import React, { FC, ReactNode, useEffect } from 'react'
 import { ThemeProvider } from 'styled-components'
 import mockRouter from 'next-router-mock'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { useGetUserInfo } from '@/hook'
 
 const ConfigProviders: FC<{ children: ReactNode }> = ({ children }) => {
   const { login } = useAuthStore()
+  const { GetUserInfoReq } = useGetUserInfo()
 
   useEffect(() => {
     if (!mockRouter.isReady) return
     const token = localStorage.getItem(USER_JWT_TOKEN)
     if (!token) return
-
     axiosInstance.defaults.headers.Authorization = `Bearer ${token}`
     login(token)
+    GetUserInfoReq()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mockRouter.pathname])
 

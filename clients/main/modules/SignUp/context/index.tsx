@@ -1,3 +1,4 @@
+import { useLogin } from '@/hook'
 import { ROUTES } from '@/models'
 import { IdentityService } from '@/services/controllers/Identity/Identity.service'
 import { IBodyRegister, IResponseAuth } from '@/services/controllers/Identity/models'
@@ -14,8 +15,7 @@ interface IContextValue {
 export const SignUpCtx = createContext<IContextValue | undefined>(undefined)
 
 export const SignUpProvider: FC<{ children: ReactNode }> = ({ children }) => {
-  const router = useRouter()
-  const { login } = useAuthStore()
+  const { loginHandler } = useLogin()
   const IdentityServices = new IdentityService()
 
   const registerReq = async (body: IBodyRegister) => {
@@ -25,8 +25,7 @@ export const SignUpProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
   const registerController = useMutation(registerReq, {
     onSuccess: data => {
-      login(data.token)
-      router.push(ROUTES.home)
+      loginHandler(data.token)
     },
   })
 

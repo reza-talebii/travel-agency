@@ -19,8 +19,6 @@ export const isAuthenticated = async (
           return res.sendStatus(401);
         }
 
-        console.log(req.user);
-
         req.user = user;
 
         next();

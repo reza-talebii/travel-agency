@@ -49,7 +49,7 @@ const LoginForm = () => {
           </Col>
         </Row>
 
-        <ButtonUi htmlType="submit" className="w-full h-[48px]">
+        <ButtonUi loading={loginController.isLoading} htmlType="submit" className="w-full h-[48px]">
           Login
         </ButtonUi>
 

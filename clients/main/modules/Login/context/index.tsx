@@ -1,9 +1,8 @@
+import { useLogin } from '@/hook'
 import { ROUTES } from '@/models'
 import { IdentityService } from '@/services/controllers/Identity/Identity.service'
 import { IBodyLogin, IResponseAuth } from '@/services/controllers/Identity/models'
-import useAuthStore from '@/store/auth'
 import { useMutation, UseMutationResult } from '@tanstack/react-query'
-import { useRouter } from 'next/navigation'
 import { FC, createContext, useContext, ReactNode } from 'react'
 
 interface IContextValue {
@@ -18,8 +17,7 @@ interface IContextValue {
 export const LoginCtx = createContext<IContextValue | undefined>(undefined)
 
 export const LoginProvider: FC<{ children: ReactNode }> = ({ children }) => {
-  const router = useRouter()
-  const { login } = useAuthStore()
+  const { loginHandler } = useLogin()
   const IdentityServices = new IdentityService()
 
   const loginReq = async (body: IBodyLogin) => {
@@ -29,8 +27,7 @@ export const LoginProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
   const loginController = useMutation(loginReq, {
     onSuccess: data => {
-      login(data.token)
-      router.push(ROUTES.home)
+      loginHandler(data.token)
     },
   })
 

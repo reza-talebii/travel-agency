@@ -20,10 +20,7 @@ axiosInstance.interceptors.response.use(
   },
 )
 axiosInstance.interceptors.request.use(
-  config => {
-    config.baseURL = process.env.NEXT_PUBLIC_BASE_URL_API
-    return config
-  },
+  config => config,
   error => Promise.reject(error),
 )
 

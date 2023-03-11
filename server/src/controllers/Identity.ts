@@ -22,7 +22,7 @@ export const login = async (req: express.Request, res: express.Response) => {
 
     if (await bcrypt.compare(password, user.password)) {
       const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, {
-        expiresIn: "15m",
+        expiresIn: "55m",
       });
       user.token = token;
       await user.save();
@@ -61,7 +61,7 @@ export const register = async (req: express.Request, res: express.Response) => {
     }
 
     const token = jwt.sign({ email: email }, process.env.JWT_SECRET, {
-      expiresIn: "15m",
+      expiresIn: "55m",
     });
 
     const user = await createUser({

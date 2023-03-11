@@ -66,7 +66,7 @@ const SignUpInfo = () => {
           </Checkbox>
         </Form.Item>
 
-        <ButtonUi htmlType="submit" className="w-full h-[48px]">
+        <ButtonUi loading={registerController.isLoading} htmlType="submit" className="w-full h-[48px]">
           Create account
         </ButtonUi>
 
