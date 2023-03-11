@@ -9,6 +9,9 @@ const UserSchema = new mongoose.Schema({
     match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,3})$/, "email is invalid"],
   },
   firstName: { type: String, required: [true, "firstName is require"] },
+  address: { type: String, required: false },
+  birthDate: { type: String, required: false },
+  phoneNumber: { type: String, required: false },
   lastName: { type: String, required: [true, "lastName is require"] },
   password: {
     type: String,

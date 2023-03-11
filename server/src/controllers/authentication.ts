@@ -9,12 +9,15 @@ export const login = async (req: express.Request, res: express.Response) => {
   try {
     const { email, password } = req.body;
     if (!email || !password) {
-      return res.status(400).json({ message: "faild is require" }).end();
+      return res.status(400).json({ message: "failds is require" }).end();
     }
     const user = await getUserByEmail(email).select("+password");
 
     if (!user) {
-      return res.status(400).json({ message: "user not found" }).end();
+      return res
+        .status(400)
+        .json({ message: "email or password is wrong" })
+        .end();
     }
 
     if (await bcrypt.compare(password, user.password)) {
@@ -32,11 +35,13 @@ export const login = async (req: express.Request, res: express.Response) => {
       };
       return res.status(200).json(templateRes).end();
     } else {
-      return res.status(400).json({ message: "password wrong" }).end();
+      return res
+        .status(400)
+        .json({ message: "email or password is wrong" })
+        .end();
     }
   } catch (error) {
-    console.log(error);
-    return res.status(400).json({ message: "try catch error" }).end();
+    return res.status(400).json({ message: "default error" }).end();
   }
 };
 
@@ -46,13 +51,13 @@ export const register = async (req: express.Request, res: express.Response) => {
     const encryptedPassword = await bcrypt.hash(password, 10);
 
     if ([email, password, firstName, lastName].some((body) => !body)) {
-      return res.sendStatus(400);
+      return res.status(400).json({ message: "fields is require" }).end();
     }
 
     const existingUser = await getUserByEmail(email);
 
     if (existingUser) {
-      return res.sendStatus(400);
+      return res.status(400).json({ message: "user already exist" }).end();
     }
 
     const token = jwt.sign({ email: email }, process.env.JWT_SECRET, {
@@ -76,7 +81,6 @@ export const register = async (req: express.Request, res: express.Response) => {
 
     return res.status(200).json(templateRes).end();
   } catch (error) {
-    console.log(error);
-    return res.sendStatus(400);
+    return res.status(400).json({ message: "default error" }).end();
   }
 };
