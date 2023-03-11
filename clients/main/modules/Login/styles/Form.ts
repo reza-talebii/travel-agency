@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const WrapperSignUpInfo = styled.section`
+export const WrapperLoginForm = styled.section`
   display: flex;
   flex-direction: column;
   padding: 0px;
@@ -10,8 +10,9 @@ const WrapperSignUpInfo = styled.section`
     font-style: normal;
     font-weight: 700;
     font-size: 40px;
-    color: #000000;
     font-family: cursive;
+
+    color: #000000;
   }
   .subTitle {
     font-weight: 400;
@@ -21,5 +22,3 @@ const WrapperSignUpInfo = styled.section`
     opacity: 0.75;
   }
 `
-
-export default WrapperSignUpInfo

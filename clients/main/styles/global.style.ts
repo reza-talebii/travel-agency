@@ -47,6 +47,11 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
+input::placeholder {
+  color: #112211 !important;
+    opacity: 0.75 !important;
+}
+
 button, [type="button"], [type="reset"], [type="submit"] {
     appearance: button;
     background-color:${props => props.theme.colors.primary} !important;

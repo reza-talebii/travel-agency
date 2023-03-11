@@ -9,6 +9,7 @@ import Link from 'next/link'
 import { emailValidator, passwordConfirmValidator } from '@/helper'
 import { useSignUpCtx } from '../../context'
 import _ from 'lodash'
+import { ROUTES } from '@/models'
 
 interface IFormValues {
   TermsPrivacy: boolean
@@ -40,23 +41,23 @@ const SignUpInfo = () => {
         <Row gutter={[16, 16]}>
           <Col span={24} md={12}>
             <Form.Item name={'firstName'} rules={[{ required: true }]}>
-              <InputUi label="FirstName" />
+              <InputUi label="FirstName" placeholder="please enter your firstName" />
             </Form.Item>
           </Col>
           <Col span={24} md={12}>
             <Form.Item name={'lastName'} rules={[{ required: true }]}>
-              <InputUi label="LastName" />
+              <InputUi label="LastName" placeholder="please enter your lastName" />
             </Form.Item>
           </Col>
         </Row>
         <Form.Item name={'email'} rules={[{ required: true }, emailValidator]}>
-          <InputUi label="Email" />
+          <InputUi label="Email" placeholder="please enter your Email" />
         </Form.Item>
         <Form.Item name={'password'} rules={[{ required: true }, { min: 5, message: 'password must be more than 5 character ' }]}>
-          <InputPassword label="Password" />
+          <InputPassword label="Password" placeholder="please enter your password" />
         </Form.Item>
         <Form.Item name={'confirmPassword'} rules={[{ required: true }, passwordConfirmValidator]}>
-          <InputPassword label="Confirm Password" />
+          <InputPassword placeholder="please enter  confirmPassword" label="Confirm Password" />
         </Form.Item>
 
         <Form.Item name={'TermsPrivacy'} rules={[{ required: true }]} valuePropName="checked">
@@ -71,7 +72,7 @@ const SignUpInfo = () => {
 
         <Typography.Text className="text-center mt-1 block">
           Already have an account?
-          <Link href={'/login'} className="!text-[#FF8682] ml-2">
+          <Link href={ROUTES.login} className="!text-[#FF8682] ml-2">
             Login
           </Link>
         </Typography.Text>

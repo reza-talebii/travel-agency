@@ -1,5 +1,4 @@
 'use client'
-
 import { FC } from 'react'
 import { SignUpProvider } from './context'
 import SignUpInfo from './modules/Info'
