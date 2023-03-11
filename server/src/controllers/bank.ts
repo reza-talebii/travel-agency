@@ -8,41 +8,17 @@ import {
   getUserById,
   getUserByToken,
 } from "../db/users";
-import { createBank, getUserBank } from "../db/bank";
+import { createBank, deleteBankById, getUserBank } from "../db/bank";
 import { getUserByJwtToken } from "../helpers/getByToken";
 
-export const deleteUser = async (
+export const deleteBank = async (
   req: express.Request,
   res: express.Response
 ) => {
   try {
     const { id } = req.params;
 
-    await deleteUserById(id);
-
-    return res.status(200).end();
-  } catch (error) {
-    return res.sendStatus(400);
-  }
-};
-
-export const updateUser = async (
-  req: express.Request,
-  res: express.Response
-) => {
-  try {
-    const { id } = req.params;
-    const { firstName, lastName } = req.body;
-
-    if ([firstName, lastName].some((body) => !body)) {
-      return res.sendStatus(400);
-    }
-
-    const user = await getUserById(id);
-
-    user.firstName = firstName;
-    user.lastName = lastName;
-    await user.save();
+    await deleteBankById(id);
 
     return res.status(200).end();
   } catch (error) {
