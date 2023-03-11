@@ -1,23 +1,30 @@
 import React from 'react'
-import { Checkbox, Divider, Form, Typography } from 'antd'
+import { Checkbox, Col, Divider, Form, Row, Typography } from 'antd'
 import WrapperSignUpInfo from './styles/Wrapper'
 import InputUi from '@/components/UI/Input'
 import FormUi from '@/components/UI/Form'
 import InputPassword from '@/components/UI/InputPassword'
 import ButtonUi from '@/components/UI/Button'
 import Link from 'next/link'
-import { emailValidator } from '@/helper'
+import { emailValidator, passwordConfirmValidator } from '@/helper'
+import { useSignUpCtx } from '../../context'
+import _ from 'lodash'
 
 interface IFormValues {
   TermsPrivacy: boolean
   confirmPassword: string
-  emailOrPhone: string
+  email: string
   password: string
+  firstName: string
+  lastName: string
 }
 
 const SignUpInfo = () => {
+  const { registerController } = useSignUpCtx()
+
   const onCreateAccount = (values: IFormValues) => {
-    console.log(values)
+    const formatData = _.omit(values, 'TermsPrivacy', 'confirmPassword')
+    registerController.mutate(formatData)
   }
 
   return (
@@ -30,13 +37,25 @@ const SignUpInfo = () => {
       </section>
 
       <FormUi onFinish={onCreateAccount} className="flex flex-col gap-2">
+        <Row gutter={[16, 16]}>
+          <Col span={24} md={12}>
+            <Form.Item name={'firstName'} rules={[{ required: true }]}>
+              <InputUi label="FirstName" />
+            </Form.Item>
+          </Col>
+          <Col span={24} md={12}>
+            <Form.Item name={'lastName'} rules={[{ required: true }]}>
+              <InputUi label="LastName" />
+            </Form.Item>
+          </Col>
+        </Row>
         <Form.Item name={'email'} rules={[{ required: true }, emailValidator]}>
           <InputUi label="Email" />
         </Form.Item>
-        <Form.Item name={'password'} rules={[{ required: true }]}>
+        <Form.Item name={'password'} rules={[{ required: true }, { min: 5, message: 'password must be more than 5 character ' }]}>
           <InputPassword label="Password" />
         </Form.Item>
-        <Form.Item name={'confirmPassword'} rules={[{ required: true }]}>
+        <Form.Item name={'confirmPassword'} rules={[{ required: true }, passwordConfirmValidator]}>
           <InputPassword label="Confirm Password" />
         </Form.Item>
 

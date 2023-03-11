@@ -7,16 +7,16 @@ interface IContextValue {
   dispatches: {};
 }
 
-export const HomeCtx = createContext<IContextValue | undefined>(undefined);
+export const {{pascalCase name}}Ctx = createContext<IContextValue | undefined>(undefined);
 
-export const HomeProvider: FC<{ children: ReactNode }> = ({ children }) => {
+export const {{pascalCase name}}Provider: FC<{ children: ReactNode }> = ({ children }) => {
   const ctxValue: IContextValue = {
     states: {},
     handlers: {},
     requests: {},
     dispatches: {},
   };
-  return <HomeCtx.Provider value={ctxValue}>{children}</HomeCtx.Provider>;
+  return <{{pascalCase name}}Ctx.Provider value={ctxValue}>{children}</{{pascalCase name}}Ctx.Provider>;
 };
 
-export const useHomeCtx = () => useContext(HomeCtx)!;
+export const use{{pascalCase name}}Ctx = () => useContext({{pascalCase name}}Ctx)!;

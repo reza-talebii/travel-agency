@@ -10,12 +10,12 @@ export const IdentityWarper = styled(Content)`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 5rem;
+  padding: 1rem 5rem;
   background: #fff;
 
   .content {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
   }
 `

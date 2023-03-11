@@ -1,22 +1,39 @@
-import { FC, createContext, useContext, ReactNode } from "react";
+import { ROUTES } from '@/models'
+import { IdentityService } from '@/services/controllers/Identity/Identity.service'
+import { IBodyRegister, IResponseAuth } from '@/services/controllers/Identity/models'
+import useAuthStore from '@/store/auth'
+import { useMutation } from '@tanstack/react-query'
+import { UseMutationResult } from '@tanstack/react-query/build/lib/types'
+import { useRouter } from 'next/navigation'
+import { FC, createContext, useContext, ReactNode } from 'react'
 
 interface IContextValue {
-  states: {};
-  handlers: {};
-  requests: {};
-  dispatches: {};
+  registerController: UseMutationResult<IResponseAuth, unknown, IBodyRegister, unknown>
 }
 
-export const HomeCtx = createContext<IContextValue | undefined>(undefined);
+export const SignUpCtx = createContext<IContextValue | undefined>(undefined)
 
-export const HomeProvider: FC<{ children: ReactNode }> = ({ children }) => {
+export const SignUpProvider: FC<{ children: ReactNode }> = ({ children }) => {
+  const router = useRouter()
+  const { login } = useAuthStore()
+  const IdentityServices = new IdentityService()
+
+  const registerReq = async (body: IBodyRegister) => {
+    const res = await IdentityServices.register(body)
+    return res.data
+  }
+
+  const registerController = useMutation(registerReq, {
+    onSuccess: data => {
+      login(data.token)
+      router.push(ROUTES.home)
+    },
+  })
+
   const ctxValue: IContextValue = {
-    states: {},
-    handlers: {},
-    requests: {},
-    dispatches: {},
-  };
-  return <HomeCtx.Provider value={ctxValue}>{children}</HomeCtx.Provider>;
-};
+    registerController,
+  }
+  return <SignUpCtx.Provider value={ctxValue}>{children}</SignUpCtx.Provider>
+}
 
-export const useHomeCtx = () => useContext(HomeCtx)!;
+export const useSignUpCtx = () => useContext(SignUpCtx)!
