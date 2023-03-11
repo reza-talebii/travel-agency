@@ -2,14 +2,21 @@ import mongoose from "mongoose";
 
 // User Config
 const UserSchema = new mongoose.Schema({
-  email: { type: String, required: true },
-  firstName: { type: String, required: true },
-  lastName: { type: String, required: true },
-  authentication: {
-    password: { type: String, required: true, select: false },
-    salt: { type: String, select: false },
-    sessionToken: { type: String, select: false },
+  email: {
+    type: String,
+    required: [true, "email is require"],
+    unique: true,
+    match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,3})$/, "email is invalid"],
   },
+  firstName: { type: String, required: [true, "firstName is require"] },
+  lastName: { type: String, required: [true, "lastName is require"] },
+  password: {
+    type: String,
+    required: [true, "password is require"],
+    select: false,
+    minlegth: 6,
+  },
+  token: { type: String, select: false },
 });
 
 export const UserModel = mongoose.model("User", UserSchema);
@@ -17,8 +24,8 @@ export const UserModel = mongoose.model("User", UserSchema);
 // User Actions
 export const getUsers = () => UserModel.find();
 export const getUserByEmail = (email: string) => UserModel.findOne({ email });
-export const getUserByToken = (sessionToken: string) =>
-  UserModel.findOne({ "authentication.sessionToken": sessionToken });
+export const getUserByToken = (token: string) =>
+  UserModel.findOne({ " token": token });
 export const getUserById = (id: string) => UserModel.findById(id);
 export const createUser = (values: Record<string, any>) =>
   new UserModel(values).save().then((user) => user.toObject());

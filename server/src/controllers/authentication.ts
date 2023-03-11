@@ -1,55 +1,49 @@
 import express from "express";
 
 import { getUserByEmail, createUser } from "../db/users";
-import { authentication, random } from "../helpers";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
+require("dotenv").config();
 
 export const login = async (req: express.Request, res: express.Response) => {
   try {
     const { email, password } = req.body;
-
     if (!email || !password) {
-      return res.sendStatus(400);
+      return res.status(400).json({ message: "faild is require" }).end();
     }
-
-    const user = await getUserByEmail(email).select(
-      "+authentication.salt +authentication.password"
-    );
+    const user = await getUserByEmail(email).select("+password");
 
     if (!user) {
-      return res.sendStatus(400);
+      return res.status(400).json({ message: "user not found" }).end();
     }
 
-    const expectedHash = authentication(user.authentication.salt, password);
-
-    if (user.authentication.password != expectedHash) {
-      return res.sendStatus(403);
+    if (await bcrypt.compare(password, user.password)) {
+      const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, {
+        expiresIn: "15m",
+      });
+      user.token = token;
+      await user.save();
+      const templateRes = {
+        id: user._id,
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        token,
+      };
+      return res.status(200).json(templateRes).end();
+    } else {
+      return res.status(400).json({ message: "password wrong" }).end();
     }
-
-    const salt = random();
-    user.authentication.sessionToken = authentication(
-      salt,
-      user._id.toString()
-    );
-
-    await user.save();
-
-    res.cookie("TRAVEL-AUTH", user.authentication.sessionToken, {
-      domain: "localhost",
-      path: "/",
-    });
-
-    return res.status(200).json(user).end();
   } catch (error) {
     console.log(error);
-    return res.sendStatus(400);
+    return res.status(400).json({ message: "try catch error" }).end();
   }
 };
 
 export const register = async (req: express.Request, res: express.Response) => {
   try {
     const { email, password, firstName, lastName } = req.body;
-
-    console.log([email, password, firstName, lastName].some((body) => !body));
+    const encryptedPassword = await bcrypt.hash(password, 10);
 
     if ([email, password, firstName, lastName].some((body) => !body)) {
       return res.sendStatus(400);
@@ -61,18 +55,26 @@ export const register = async (req: express.Request, res: express.Response) => {
       return res.sendStatus(400);
     }
 
-    const salt = random();
+    const token = jwt.sign({ email: email }, process.env.JWT_SECRET, {
+      expiresIn: "15m",
+    });
+
     const user = await createUser({
       email,
       firstName,
       lastName,
-      authentication: {
-        salt,
-        password: authentication(salt, password),
-      },
+      password: encryptedPassword,
     });
 
-    return res.status(200).json(user).end();
+    const templateRes = {
+      id: user._id,
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      token,
+    };
+
+    return res.status(200).json(templateRes).end();
   } catch (error) {
     console.log(error);
     return res.sendStatus(400);

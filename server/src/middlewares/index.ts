@@ -1,53 +1,33 @@
 import express from "express";
-import { merge, get } from "lodash";
 
-import { getUserByToken } from "../db/users";
+require("dotenv").config();
+import jwt from "jsonwebtoken";
 
 export const isAuthenticated = async (
-  req: express.Request,
+  req: any,
   res: express.Response,
   next: express.NextFunction
 ) => {
   try {
-    const sessionToken = req.cookies["TRAVEL-AUTH"];
+    const authHeader = req.headers.authorization;
 
-    if (!sessionToken) {
-      return res.sendStatus(401);
+    if (authHeader) {
+      const token = authHeader.split(" ")[1];
+
+      jwt.verify(token, process.env.JWT_SECRET, (err: any, user: any) => {
+        if (err) {
+          return res.sendStatus(401);
+        }
+
+        console.log(req.user);
+
+        req.user = user;
+
+        next();
+      });
+    } else {
+      res.sendStatus(401);
     }
-
-    const existingUser = await getUserByToken(sessionToken);
-
-    if (!existingUser) {
-      return res.sendStatus(403);
-    }
-
-    merge(req, { identity: existingUser });
-
-    return next();
-  } catch (error) {
-    console.log(error);
-    return res.sendStatus(400);
-  }
-};
-
-export const isOwner = async (
-  req: express.Request,
-  res: express.Response,
-  next: express.NextFunction
-) => {
-  try {
-    const { id } = req.params;
-    const currentUserId = get(req, "identity._id") as string;
-
-    if (!currentUserId) {
-      return res.sendStatus(400);
-    }
-
-    if (currentUserId.toString() !== id) {
-      return res.sendStatus(403);
-    }
-
-    next();
   } catch (error) {
     console.log(error);
     return res.sendStatus(400);

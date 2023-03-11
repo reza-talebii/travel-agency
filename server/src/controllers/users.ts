@@ -1,6 +1,13 @@
 import express from "express";
+require("dotenv").config();
+import jwt from "jsonwebtoken";
 
-import { deleteUserById, getUserById, getUsers } from "../db/users";
+import {
+  deleteUserById,
+  getUserByEmail,
+  getUserById,
+  getUsers,
+} from "../db/users";
 
 export const getAllUsers = async (
   req: express.Request,
@@ -54,5 +61,36 @@ export const updateUser = async (
   } catch (error) {
     console.log(error);
     return res.sendStatus(400);
+  }
+};
+
+export const getUser = async (req: express.Request, res: express.Response) => {
+  const { token } = req.body;
+  try {
+    const user: any = jwt.verify(
+      token,
+      process.env.JWT_SECRET,
+      (err: any, res: any) => {
+        if (err) {
+          return "token expired";
+        }
+        return res;
+      }
+    );
+    if (user === "token expired") {
+      return res.status(401);
+    }
+
+    const email = user.email;
+
+    const findUser = await getUserByEmail(email);
+
+    if (findUser) {
+      return res.status(200).json(findUser).end();
+    } else {
+      return res.status(403).end();
+    }
+  } catch {
+    return res.status(400);
   }
 };
