@@ -4,12 +4,32 @@ import ButtonUi from '@/components/UI/Button'
 import CheckboxUi from '@/components/UI/Checkbox'
 import FormUi from '@/components/UI/Form'
 import InputUi from '@/components/UI/Input'
+import { ROUTES } from '@/models'
+import { BankService } from '@/services/controllers/Bank/Bank.service'
+import { IBodyAddCard } from '@/services/controllers/Bank/models'
 import { LeftOutlined } from '@ant-design/icons'
-import { Form, Space, Typography } from 'antd'
+import { useMutation } from '@tanstack/react-query'
+import { Form, message, Space, Typography } from 'antd'
+import { useRouter } from 'next/navigation'
 import { WrapperAddCard } from './styles'
 
 const AddCard = () => {
-  const onAdd = () => {}
+  const router = useRouter()
+  const services = new BankService()
+
+  const addCardReq = async (body: IBodyAddCard) => {
+    const res = await services.addCard(body)
+    return res.data
+  }
+
+  const { isLoading, mutate } = useMutation(addCardReq, {
+    onSuccess: () => {
+      message.success('')
+      router.push(ROUTES.account)
+    },
+  })
+
+  const onAdd = (values: { cardNumber: number; iban: string }) => mutate(values)
 
   return (
     <WrapperAddCard>
@@ -36,7 +56,7 @@ const AddCard = () => {
           <CheckboxUi>Securely save my information for 1-click checkout</CheckboxUi>
         </Form.Item>
 
-        <ButtonUi loading={true} htmlType="submit" className="w-full h-[48px]">
+        <ButtonUi loading={isLoading} htmlType="submit" className="w-full h-[48px]">
           Add payment method
         </ButtonUi>
 
