@@ -12,20 +12,26 @@ import { ThemeProvider } from 'styled-components'
 import mockRouter from 'next-router-mock'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useGetUserInfo } from '@/hook'
+import fa_IR from 'antd/locale/fa_IR'
 
 const ConfigProviders: FC<{ children: ReactNode }> = ({ children }) => {
-  const { login } = useAuthStore()
-  const { GetUserInfoReq } = useGetUserInfo()
+  const { login, token } = useAuthStore()
+  // const { GetUserInfoReq } = useGetUserInfo()
 
   useEffect(() => {
     if (!mockRouter.isReady) return
-    const token = localStorage.getItem(USER_JWT_TOKEN)
-    if (!token) return
-    axiosInstance.defaults.headers.Authorization = `Bearer ${token}`
-    login(token)
-    GetUserInfoReq()
+    const tokenLocalStorage = localStorage.getItem(USER_JWT_TOKEN)
+    if (!tokenLocalStorage) return
+    axiosInstance.defaults.headers.Authorization = `Bearer ${tokenLocalStorage}`
+    login(tokenLocalStorage)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mockRouter.pathname])
+
+  // useEffect(() => {
+  //   if (!mockRouter.isReady || !token) return
+  //   axiosInstance.defaults.headers.Authorization = `Bearer ${token}`
+  //   GetUserInfoReq()
+  // }, [token, mockRouter.pathname])
 
   const antdTheme = {
     token: antdThemeToken,
@@ -34,7 +40,7 @@ const ConfigProviders: FC<{ children: ReactNode }> = ({ children }) => {
   const queryClient = new QueryClient()
   return (
     <QueryClientProvider client={queryClient}>
-      <ConfigProvider theme={antdTheme}>
+      <ConfigProvider theme={antdTheme} direction="rtl" locale={fa_IR}>
         <ThemeProvider theme={styledComponentsTheme}>
           <GlobalStyle />
           {children}

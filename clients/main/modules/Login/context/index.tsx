@@ -1,5 +1,4 @@
 import { useLogin } from '@/hook'
-import { ROUTES } from '@/models'
 import { IdentityService } from '@/services/controllers/Identity/Identity.service'
 import { IBodyLogin, IResponseAuth } from '@/services/controllers/Identity/models'
 import { useMutation, UseMutationResult } from '@tanstack/react-query'
@@ -27,7 +26,7 @@ export const LoginProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
   const loginController = useMutation(loginReq, {
     onSuccess: data => {
-      loginHandler(data.token)
+      if (data) loginHandler(data.token)
     },
   })
 

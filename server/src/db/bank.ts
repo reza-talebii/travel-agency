@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 // User Config
 const BankSchema = new mongoose.Schema({
   cardNumber: {
-    type: String,
+    type: Number,
     required: [true, "cardNumber is require"],
     unique: [true, "cardNumber is already exist"],
   },

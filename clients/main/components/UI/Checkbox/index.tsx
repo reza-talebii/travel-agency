@@ -1,12 +1,13 @@
-import { Checkbox, CheckboxProps } from "antd";
-import React, { FC, ReactNode } from "react";
+import { Checkbox, CheckboxProps } from 'antd'
+import React, { FC, ReactNode } from 'react'
+import { CheckBoxStyled } from './style'
 
 interface IProps extends CheckboxProps {
-  children?: ReactNode;
+  children?: ReactNode
 }
 
 const CheckboxUi: FC<IProps> = ({ children, ...props }) => {
-  return <Checkbox {...props}>{children}</Checkbox>;
-};
+  return <CheckBoxStyled {...props}>{children}</CheckBoxStyled>
+}
 
-export default CheckboxUi;
+export default CheckboxUi
