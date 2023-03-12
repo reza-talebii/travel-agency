@@ -15,14 +15,13 @@ import { useGetUserInfo } from '@/hook'
 
 const ConfigProviders: FC<{ children: ReactNode }> = ({ children }) => {
   const { login, token } = useAuthStore()
-  const { GetUserInfoReq } = useGetUserInfo()
+  // const { GetUserInfoReq } = useGetUserInfo()
 
   useEffect(() => {
     if (!mockRouter.isReady) return
     const tokenLocalStorage = localStorage.getItem(USER_JWT_TOKEN)
     if (!tokenLocalStorage) return
     axiosInstance.defaults.headers.Authorization = `Bearer ${tokenLocalStorage}`
-    GetUserInfoReq()
     login(tokenLocalStorage)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mockRouter.pathname])

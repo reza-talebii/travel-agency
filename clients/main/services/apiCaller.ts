@@ -4,8 +4,9 @@ import { axiosInstance } from './axiosInstance'
 
 axiosInstance.interceptors.response.use(
   (response: AxiosResponse) => {
-    if (response.status >= 200 && response.status < 300) {
-      return response
+    if (response.status >= 200 && response.status < 300 && response.config.method !== 'GET') {
+      message.success('mission accomplished')
+      console.log(response)
     }
     return response
   },

@@ -30,7 +30,7 @@ const SetPassword = () => {
         </Form.Item>
 
         <ButtonUi loading={false} htmlType="submit" className="w-full h-[48px]">
-          Login
+          Set password
         </ButtonUi>
       </FormUi>
     </WrapperSetPassword>

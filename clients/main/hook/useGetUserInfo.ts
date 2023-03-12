@@ -24,10 +24,5 @@ export const useGetUserInfo = () => {
     setUserInfo(res.data)
   }
 
-  useEffect(() => {
-    GetUserInfoReq()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
   return { GetUserInfoReq }
 }
