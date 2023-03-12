@@ -10,6 +10,7 @@ import { emailValidator, passwordConfirmValidator } from '@/helper'
 import { useSignUpCtx } from '../../context'
 import _ from 'lodash'
 import { ROUTES } from '@/models'
+import AuthProvider from '@/components/AuthProvider'
 
 interface IFormValues {
   TermsPrivacy: boolean
@@ -79,6 +80,7 @@ const SignUpInfo = () => {
       </FormUi>
 
       <Divider className="!my-0 ">Or Sign up with</Divider>
+      <AuthProvider />
     </WrapperSignUpInfo>
   )
 }

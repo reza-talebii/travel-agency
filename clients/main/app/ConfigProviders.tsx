@@ -27,11 +27,11 @@ const ConfigProviders: FC<{ children: ReactNode }> = ({ children }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mockRouter.pathname])
 
-  useEffect(() => {
-    if (!mockRouter.isReady || !token) return
-    axiosInstance.defaults.headers.Authorization = `Bearer ${token}`
-    GetUserInfoReq()
-  }, [token, mockRouter.pathname])
+  // useEffect(() => {
+  //   if (!mockRouter.isReady || !token) return
+  //   axiosInstance.defaults.headers.Authorization = `Bearer ${token}`
+  //   GetUserInfoReq()
+  // }, [token, mockRouter.pathname])
 
   const antdTheme = {
     token: antdThemeToken,
