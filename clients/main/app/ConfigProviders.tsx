@@ -12,6 +12,7 @@ import { ThemeProvider } from 'styled-components'
 import mockRouter from 'next-router-mock'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useGetUserInfo } from '@/hook'
+import fa_IR from 'antd/locale/fa_IR'
 
 const ConfigProviders: FC<{ children: ReactNode }> = ({ children }) => {
   const { login, token } = useAuthStore()
@@ -39,7 +40,7 @@ const ConfigProviders: FC<{ children: ReactNode }> = ({ children }) => {
   const queryClient = new QueryClient()
   return (
     <QueryClientProvider client={queryClient}>
-      <ConfigProvider theme={antdTheme}>
+      <ConfigProvider theme={antdTheme} direction="rtl" locale={fa_IR}>
         <ThemeProvider theme={styledComponentsTheme}>
           <GlobalStyle />
           {children}
