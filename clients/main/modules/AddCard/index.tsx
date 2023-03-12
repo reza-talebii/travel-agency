@@ -8,6 +8,7 @@ import InputMuskUi from '@/components/UI/InputMask'
 import { ibanRegex } from '@/constants'
 import { getBankName } from '@/helper'
 import { validateCard } from '@/helper/bank/validateBankcard'
+import { useLogout } from '@/hook'
 import { ROUTES } from '@/models'
 import { BankService } from '@/services/controllers/Bank/Bank.service'
 import { IBodyAddCard } from '@/services/controllers/Bank/models'
@@ -20,6 +21,7 @@ import CardNumberInput from './components/cardNumberInput'
 import { WrapperAddCard } from './styles'
 
 const AddCard = () => {
+  const { logoutHandler } = useLogout()
   const [accountInfo, setAccountInfo] = useState<{ cardNumber: string; iban: string }>({ cardNumber: '', iban: '' })
   const [errors, setErrors] = useState<{ [key: string]: { error: boolean; message: string } }>({
     cardNumber: { error: false, message: '' },
@@ -34,7 +36,7 @@ const AddCard = () => {
 
   const addCardReq = async (body: IBodyAddCard) => {
     const res = await services.addCard(body)
-    return res.data
+    return res.status
   }
 
   const { isLoading, mutate } = useMutation(addCardReq, {
@@ -43,7 +45,18 @@ const AddCard = () => {
     },
   })
 
-  const onAdd = (values: { cardNumber: number; iban: string }) => mutate(values)
+  const onAdd = () => {
+    if (errors['cardNumber'].error) {
+      message.error('لطفا شماره کارت معتبری وارد کنید')
+      return
+    }
+    if (errors['iban'].error) {
+      message.error('لطفا شماره شبا معبری وارد کنید')
+      return
+    }
+
+    mutate({ cardNumber: +accountInfo.cardNumber, iban: accountInfo.iban })
+  }
 
   const isValid = (name: string, value: string) => {
     const error = {
@@ -79,9 +92,14 @@ const AddCard = () => {
     }
   }
 
+  const backHandler = () => {
+    logoutHandler()
+    router.push(ROUTES.login)
+  }
+
   return (
     <WrapperAddCard>
-      <Space className="back" size={5}>
+      <Space className="back" size={5} onClick={backHandler}>
         <LeftOutlined />
         <span>back</span>
       </Space>
