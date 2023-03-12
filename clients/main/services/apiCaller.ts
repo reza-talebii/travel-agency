@@ -3,9 +3,9 @@ import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
 import { axiosInstance } from './axiosInstance'
 
 axiosInstance.interceptors.response.use(
-  (response: AxiosResponse) => {
+  (response: AxiosResponse<any, any>) => {
     if (response.status >= 200 && response.status < 300) {
-      return response.data
+      return { status: response.status, data: response.data }
     }
     return response
   },
