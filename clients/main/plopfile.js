@@ -97,8 +97,8 @@ module.exports = plop => {
       },
       {
         type: 'add',
-        path: './services/controllers/{{pascalCase name}}/models/args.models.ts',
-        templateFile: 'plop-templates/services/models/args.models.ts.hbs',
+        path: './services/controllers/{{pascalCase name}}/models/body.models.ts',
+        templateFile: 'plop-templates/services/models/body.models.ts.hbs',
       },
       {
         type: 'add',
