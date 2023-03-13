@@ -8,4 +8,6 @@ export enum ROUTES {
   flight = '/flight',
   stays = '/stays',
   favorites = '/favorites',
+  transactionHistory = '/account/history',
+  paymentMethods = '/account/payment-methods',
 }

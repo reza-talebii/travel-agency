@@ -19,11 +19,11 @@ export const AccountLayoutStyled = styled.section`
     flex-direction: column;
     align-items: center;
     position: absolute;
-    /* bottom: -166px; */
+    bottom: -132px;
     left: 50%;
     right: 50%;
     transform: translate(-50%, -50%);
-    bottom: -305px;
+    bottom: -105px;
 
     .avatar {
       width: 160px;
@@ -43,6 +43,14 @@ export const AccountLayoutStyled = styled.section`
       font-size: 16px;
       color: #112211;
       opacity: 0.75;
+    }
+  }
+
+  .ant-tabs-nav-list {
+    width: 100%;
+
+    .ant-tabs-tab {
+      width: 100%;
     }
   }
 `
