@@ -1,8 +1,8 @@
 import React from 'react'
 import PaymentsMethods from '@/modules/Payments'
 
-const index = () => {
+const Page = () => {
   return <PaymentsMethods />
 }
 
-export default index
+export default Page

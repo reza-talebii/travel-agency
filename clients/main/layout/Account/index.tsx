@@ -45,8 +45,6 @@ const LayoutAccount: FC<{ children: ReactNode }> = ({ children }) => {
       </section>
 
       <Tabs defaultActiveKey={ROUTES.account} items={tabItems} activeKey={pathname} />
-
-      {children}
     </AccountLayoutStyled>
   )
 }

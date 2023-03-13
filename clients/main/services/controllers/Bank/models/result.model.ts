@@ -3,4 +3,5 @@ export interface ICard {
   iban: string
   status: number
   userId: string
+  id: string
 }

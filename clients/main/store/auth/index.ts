@@ -1,5 +1,5 @@
 import { IUser } from '@/models'
-import create from 'zustand'
+import { create } from 'zustand'
 
 interface IStore {
   token?: string
