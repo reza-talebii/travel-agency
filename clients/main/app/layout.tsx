@@ -1,4 +1,4 @@
-import localFont from '@next/font/local'
+import localFont from 'next/font/local'
 import ConfigProviders from './ConfigProviders'
 import '@/styles/globals.css'
 

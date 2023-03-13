@@ -1,0 +1,8 @@
+.profileDropDown .ant-dropdown-menu {
+  padding: 32px;
+  max-width: 329px !important;
+  min-height: 363px;
+  background: #ffffff;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+}
