@@ -1,3 +1,5 @@
+'use client'
+
 import React, { FC, ReactNode } from 'react'
 import { FormControlContainer } from './styles'
 import { Typography } from 'antd'

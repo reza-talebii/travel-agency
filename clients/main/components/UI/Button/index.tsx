@@ -1,9 +1,11 @@
-import React, { FC, ReactNode } from "react";
-import { ButtonUiStyled } from "./styles";
-import { ButtonProps } from "antd/lib/button";
+'use client'
+
+import React, { FC, ReactNode } from 'react'
+import { ButtonUiStyled } from './styles'
+import { ButtonProps } from 'antd/lib/button'
 
 interface IProps extends ButtonProps {
-  children?: ReactNode;
+  children?: ReactNode
 }
 
 const ButtonUi: FC<IProps> = ({ children, ...props }) => {
@@ -11,7 +13,7 @@ const ButtonUi: FC<IProps> = ({ children, ...props }) => {
     <ButtonUiStyled type="primary" {...props}>
       {children}
     </ButtonUiStyled>
-  );
-};
+  )
+}
 
-export default ButtonUi;
+export default ButtonUi

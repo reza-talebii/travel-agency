@@ -1,3 +1,5 @@
+'use client'
+
 import { InputProps } from 'antd'
 import React, { FC, ReactNode } from 'react'
 import { InputUiKitContainer } from './styles/Container'

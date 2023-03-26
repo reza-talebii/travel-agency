@@ -1,3 +1,5 @@
+'use client'
+
 import { Checkbox, CheckboxProps } from 'antd'
 import React, { FC, ReactNode } from 'react'
 import { CheckBoxStyled } from './style'

@@ -1,3 +1,5 @@
+'use client'
+
 import React, { FC } from 'react'
 import { TableUiStyled } from './style'
 import { Table, TableProps } from 'antd'

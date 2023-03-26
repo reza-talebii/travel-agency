@@ -1,7 +1,8 @@
 import '@/styles/globals.css'
+
+import StyledComponentsRegistry from '@/lib/registry'
 import localFont from 'next/font/local'
 import ConfigProviders from './ConfigProviders'
-import { MainLayout } from '@/layout'
 
 export const metadata = {
   title: 'Golobe ',
@@ -18,7 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className={`${font.variable} font-sans`}>
         <ConfigProviders>
-          <MainLayout>{children}</MainLayout>
+          <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
         </ConfigProviders>
       </body>
     </html>

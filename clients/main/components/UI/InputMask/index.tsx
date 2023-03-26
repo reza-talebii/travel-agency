@@ -1,3 +1,5 @@
+'use client'
+
 import React, { FC } from 'react'
 import { Props as inputProps } from 'react-input-mask'
 import FormControlUiKit from '../FormControl'

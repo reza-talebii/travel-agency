@@ -1,3 +1,5 @@
+'use client'
+
 import { TextAreaProps } from 'antd/es/input/TextArea'
 import React, { FC } from 'react'
 import FormControlUiKit from '../FormControl'
