@@ -1,3 +1,5 @@
+![Logo](https://svgur.com/i/rV7.svg)
+
 # travel agency
 
 
@@ -25,6 +27,6 @@ Full stack airline agency project with next js, typescript, nodejs
 ## fiqma design
 
 https://www.figma.com/file/5ibtQawi3Gpomm9lqRFru1/Golobe---Travel-agency-website-(Community)?node-id=160%3A5219&t=zvQv0E7pDMPui9Pm-1
-## preview
 
-![Logo](https://svgur.com/i/rV7.svg)
+
+
