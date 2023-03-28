@@ -3,5 +3,6 @@ export interface IUser {
   lastName: string
   token: string
   email: string
+  address: string
   bankAccount: []
 }

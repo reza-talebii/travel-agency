@@ -1,11 +1,12 @@
-import Information from '@/modules/Information'
 import { Metadata } from 'next'
 import React from 'react'
 
 export const metadata: Metadata = {
-  title: 'Account',
+  title: 'history',
 }
 
-const Page = () => <Information />
+const Page = () => {
+  return <div>history</div>
+}
 
 export default Page
