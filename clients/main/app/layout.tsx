@@ -1,8 +1,7 @@
-import '@/styles/globals.css'
-
 import StyledComponentsRegistry from '@/lib/registry'
 import localFont from 'next/font/local'
 import ConfigProviders from './ConfigProviders'
+import '@/styles/globals.css'
 
 export const metadata = {
   title: 'Golobe ',

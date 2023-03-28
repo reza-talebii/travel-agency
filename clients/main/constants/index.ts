@@ -1,2 +1,2 @@
-export * from './localStorages'
+export * from './cookies'
 export * from './ibanRegex'

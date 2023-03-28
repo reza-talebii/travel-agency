@@ -1,3 +1,5 @@
+'use client'
+
 import { Col, Row, Typography } from 'antd'
 import AddNewCard from './components/AddCardItem'
 import PaymentsItem from './components/Item'

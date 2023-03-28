@@ -6,6 +6,8 @@ import AuthButtons from './components/AuthBtns'
 import TypeTravelHeader from './components/TypeTravelTab'
 import useAuthStore from '@/store/auth'
 import LoggedInHeader from './components/LoggedInHeader'
+import Link from 'next/link'
+import { ROUTES } from '@/models'
 
 const Header = () => {
   const { token } = useAuthStore()
@@ -13,7 +15,9 @@ const Header = () => {
   return (
     <HeaderWrapper>
       <TypeTravelHeader />
-      <ImageUi src={logo} alt="logo" width="110.35px" height="36px" />
+      <Link href={ROUTES.home}>
+        <ImageUi src={logo} alt="logo" width="110.35px" height="36px" />
+      </Link>
       {token ? <LoggedInHeader /> : <AuthButtons />}
     </HeaderWrapper>
   )
