@@ -9,8 +9,8 @@ import { MdFlightTakeoff } from '@react-icons/all-files/md/MdFlightTakeoff'
 
 const items: MenuProps['items'] = [
   {
-    label: <Link href={ROUTES.stays}>Find Stays</Link>,
-    key: ROUTES.stays,
+    label: <Link href={ROUTES.hotels}>Find Stays</Link>,
+    key: ROUTES.hotels,
     icon: <IoMdBed />,
   },
   {

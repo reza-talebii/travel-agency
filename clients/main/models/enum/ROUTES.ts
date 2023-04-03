@@ -7,7 +7,6 @@ export enum ROUTES {
   addCard = '/add-card',
   flight = '/flights',
   hotels = '/hotels',
-  stays = '/stays',
   favorites = '/favorites',
   transactionHistory = '/account/history',
   paymentMethods = '/account/payment-methods',
