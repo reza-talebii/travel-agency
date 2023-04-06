@@ -1,8 +1,10 @@
-import StyledComponentsRegistry from '@/lib/registry'
-import localFont from 'next/font/local'
-import ConfigProviders from './ConfigProviders'
-import '@/styles/globals.css'
+import dynamic from 'next/dynamic'
 import { Metadata } from 'next'
+import localFont from 'next/font/local'
+
+const StyledComponentsRegistry = dynamic(() => import('@/lib/registry'))
+const ConfigProviders = dynamic(() => import('./ConfigProviders'))
+import '@/styles/globals.css'
 
 export const metadata: Metadata = {
   title: {
