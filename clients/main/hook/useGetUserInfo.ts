@@ -1,5 +1,5 @@
+import { UserSchema } from '@/models/schema'
 import axios from 'axios'
-import { useEffect } from 'react'
 import { AccountService } from 'services/controllers/Account/Account.service'
 import useAuthStore from 'store/auth'
 import { useLogout } from './auth/useLogOut'
@@ -20,7 +20,7 @@ export const useGetUserInfo = () => {
 
   const GetUserInfoReq = async () => {
     const res = await services.GetUserInfo()
-    if (res?.status !== 200) return
+    if (res?.status !== 200 || !UserSchema.safeParse(res.data).success) return
     setUserInfo(res.data)
   }
 
