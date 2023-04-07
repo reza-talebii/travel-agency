@@ -18,6 +18,8 @@ Full stack airline agency project with next js, typescript, nodejs
 
 ## Technologies
 
+
+-zod - next auth
 - antd - styled-component - tailwind css
 - axios - react-query
 - loadash - plopjs 
@@ -28,5 +30,6 @@ Full stack airline agency project with next js, typescript, nodejs
 
 https://www.figma.com/file/5ibtQawi3Gpomm9lqRFru1/Golobe---Travel-agency-website-(Community)?node-id=160%3A5219&t=zvQv0E7pDMPui9Pm-1
 
-
+## design system
+https://github.com/reza-talebii/Golobe-design-system
 
