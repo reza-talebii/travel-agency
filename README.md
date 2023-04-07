@@ -19,7 +19,7 @@ Full stack airline agency project with next js, typescript, nodejs
 ## Technologies
 
 
--zod - next auth
+- zod - next auth
 - antd - styled-component - tailwind css
 - axios - react-query
 - loadash - plopjs 
