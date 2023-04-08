@@ -8,16 +8,24 @@ export const authOptions: NextAuthOptions = {
     CredentialsProvider({
       name: 'credentials',
       credentials: {
-        email: { label: 'Email', type: 'text', placeholder: 'Email' },
-        password: { label: 'Password', type: 'password' },
+        email: { label: 'email', type: 'text', placeholder: 'email' },
+        password: { label: 'password', type: 'password' },
       },
       async authorize(credentials, req) {
-        const res = await apiCaller.post(IdentityUrls.login, credentials)
+        const res = await fetch('http://localhost:8080/Identity/login', {
+          method: 'POST',
+          body: JSON.stringify(credentials),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+
+        const data = await res.json()
 
         if (res.status !== 200) {
           return null
         }
-        return res.data as any
+        return data as any
       },
     }),
   ],
@@ -38,6 +46,7 @@ export const authOptions: NextAuthOptions = {
 
   pages: {
     signIn: '/login',
+    error: '/login',
   },
 }
 

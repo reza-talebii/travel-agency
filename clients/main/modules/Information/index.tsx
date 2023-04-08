@@ -3,20 +3,19 @@
 import ButtonUi from '@/components/UI/Button'
 import FormUi from '@/components/UI/Form'
 import InputUi from '@/components/UI/Input'
-import useAuthStore from '@/store/auth'
+import { IUser } from '@/models'
 import { Col, Form, Row, Typography } from 'antd'
-import React, { useEffect } from 'react'
+import React, { FC, useEffect } from 'react'
 import { InformationWrapper } from './styles'
 
-const Information = () => {
-  const { userInfo } = useAuthStore()
+const Information: FC<{ userInfo: IUser }> = ({ userInfo }) => {
   const [formControl] = Form.useForm()
 
   useEffect(() => {
-    if (!userInfo) return
-
-    formControl.setFieldsValue(userInfo)
-  }, [userInfo])
+    formControl.setFieldsValue({
+      ...userInfo,
+    })
+  }, [])
 
   return (
     <InformationWrapper>

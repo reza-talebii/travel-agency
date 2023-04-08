@@ -1,3 +1,5 @@
+'use client'
+
 import ButtonUi from '@/components/UI/Button'
 import FormUi from '@/components/UI/Form'
 import InputUi from '@/components/UI/Input'
@@ -5,18 +7,25 @@ import InputPassword from '@/components/UI/InputPassword'
 import { emailValidator } from '@/helper'
 import { ROUTES } from '@/models'
 import { Checkbox, Col, Divider, Form, Row, Typography } from 'antd'
+import { signIn } from 'next-auth/react'
 import Link from 'next/link'
 import React from 'react'
-import { useLoginCtx } from '../../context'
 import { WrapperLoginForm } from '../../styles'
 
 const LoginForm = () => {
-  const {
-    requests: { loginController },
-  } = useLoginCtx()
+  const [loading, setLoading] = React.useState(false)
 
   const onLogin = (values: { email: string; password: string }) => {
-    loginController.mutate(values)
+    setLoading(true)
+
+    signIn('credentials', {
+      email: values.email,
+      password: values.password,
+      redirect: true,
+      callbackUrl: ROUTES.account,
+    }).finally(() => {
+      setLoading(false)
+    })
   }
 
   return (
@@ -49,7 +58,7 @@ const LoginForm = () => {
           </Col>
         </Row>
 
-        <ButtonUi loading={loginController.isLoading} htmlType="submit" className="w-full h-[48px]">
+        <ButtonUi loading={loading} htmlType="submit" className="w-full h-[48px]">
           Login
         </ButtonUi>
 

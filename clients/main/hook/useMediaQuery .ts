@@ -1,10 +1,9 @@
-import { IObject } from 'models/interfaces'
 import { useCallback, useEffect, useState } from 'react'
 
 export const useMediaQuery = (width: number) => {
   const [targetReached, setTargetReached] = useState<boolean | undefined>(undefined)
 
-  const updateTarget = useCallback((e: IObject) => {
+  const updateTarget = useCallback((e: any) => {
     setTargetReached(!!e.matches)
   }, [])
 

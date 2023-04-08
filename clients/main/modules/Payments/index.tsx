@@ -1,11 +1,14 @@
 'use client'
 
+import { ICard } from '@/services/controllers/Bank/models'
 import { Col, Row, Typography } from 'antd'
-import AddNewCard from './components/AddCardItem'
+import { FC } from 'react'
 import PaymentsItem from './components/Item'
 import { WrapperPayments } from './styles'
 
-const PaymentsMethods = () => {
+const PaymentsMethods: FC<{ cards: ICard[] }> = ({ cards }) => {
+  console.log(cards)
+
   return (
     <WrapperPayments>
       <Typography.Title>Payment methods</Typography.Title>

@@ -22,11 +22,11 @@ interface IFormValues {
 }
 
 const SignUpInfo = () => {
-  const { registerController } = useSignUpCtx()
+  // const { registerController } = useSignUpCtx()
 
   const onCreateAccount = (values: IFormValues) => {
     const formatData = _.omit(values, 'TermsPrivacy', 'confirmPassword')
-    registerController.mutate(formatData)
+    // registerController.mutate(formatData)
   }
 
   return (
@@ -67,7 +67,7 @@ const SignUpInfo = () => {
           </Checkbox>
         </Form.Item>
 
-        <ButtonUi loading={registerController.isLoading} htmlType="submit" className="w-full h-[48px]">
+        <ButtonUi htmlType="submit" className="w-full h-[48px]">
           Create account
         </ButtonUi>
 
