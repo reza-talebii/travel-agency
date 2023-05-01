@@ -5,27 +5,18 @@ import FormUi from '@/components/UI/Form'
 import InputUi from '@/components/UI/Input'
 import InputPassword from '@/components/UI/InputPassword'
 import { emailValidator } from '@/helper'
+import { useSignIn } from '@/hook/auth/useSignIn'
 import { ROUTES } from '@/models'
 import { Checkbox, Col, Divider, Form, Row, Typography } from 'antd'
-import { signIn } from 'next-auth/react'
 import Link from 'next/link'
 import React from 'react'
 import { WrapperLoginForm } from '../../styles'
 
 const LoginForm = () => {
-  const [loading, setLoading] = React.useState(false)
+  const { loading, signInHandler } = useSignIn()
 
   const onLogin = (values: { email: string; password: string }) => {
-    setLoading(true)
-
-    signIn('credentials', {
-      email: values.email,
-      password: values.password,
-      redirect: true,
-      callbackUrl: ROUTES.account,
-    }).finally(() => {
-      setLoading(false)
-    })
+    signInHandler(values)
   }
 
   return (

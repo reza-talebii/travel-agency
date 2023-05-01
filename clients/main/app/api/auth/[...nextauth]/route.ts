@@ -1,9 +1,16 @@
-import { apiCaller } from '@/services/apiCaller'
-import { IdentityUrls } from '@/services/controllers/Identity/urls'
 import NextAuth, { NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 
 export const authOptions: NextAuthOptions = {
+  session: {
+    strategy: 'jwt',
+    maxAge: 30 * 24 * 60 * 60,
+  },
+
+  pages: {
+    signIn: '/login',
+  },
+
   providers: [
     CredentialsProvider({
       name: 'credentials',
@@ -22,14 +29,10 @@ export const authOptions: NextAuthOptions = {
 
         const data = await res.json()
 
-        if (res.status !== 200) {
-          return null
-        }
         return data as any
       },
     }),
   ],
-  secret: process.env.NEXT_PUBLIC_SECRET,
   callbacks: {
     jwt: async ({ token, user }) => {
       return { ...token, ...user }
@@ -39,15 +42,7 @@ export const authOptions: NextAuthOptions = {
       return session
     },
   },
-  session: {
-    strategy: 'jwt',
-    maxAge: 30 * 24 * 60 * 60, // 30 Days
-  },
-
-  pages: {
-    signIn: '/login',
-    error: '/login',
-  },
 }
 
-export default NextAuth(authOptions)
+const handler = NextAuth(authOptions)
+export { handler as GET, handler as POST }

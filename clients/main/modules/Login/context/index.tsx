@@ -1,3 +1,5 @@
+'use client'
+
 import { FC, createContext, useContext, ReactNode } from 'react'
 
 interface IContextValue {

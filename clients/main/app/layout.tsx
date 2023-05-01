@@ -2,7 +2,6 @@ import dynamic from 'next/dynamic'
 import { Metadata } from 'next'
 import localFont from 'next/font/local'
 
-const StyledComponentsRegistry = dynamic(() => import('@/lib/registry'))
 const ConfigProviders = dynamic(() => import('./ConfigProviders'))
 import '@/styles/globals.css'
 
@@ -23,9 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={`${font.variable} font-sans`}>
-        <ConfigProviders>
-          <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
-        </ConfigProviders>
+        <ConfigProviders>{children}</ConfigProviders>
       </body>
     </html>
   )

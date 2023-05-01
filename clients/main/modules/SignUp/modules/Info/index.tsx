@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import { Checkbox, Col, Divider, Form, Row, Typography } from 'antd'
 import WrapperSignUpInfo from './styles/Wrapper'
@@ -22,11 +24,11 @@ interface IFormValues {
 }
 
 const SignUpInfo = () => {
-  // const { registerController } = useSignUpCtx()
+  const { registerController } = useSignUpCtx()
 
   const onCreateAccount = (values: IFormValues) => {
     const formatData = _.omit(values, 'TermsPrivacy', 'confirmPassword')
-    // registerController.mutate(formatData)
+    registerController.mutate(formatData)
   }
 
   return (
