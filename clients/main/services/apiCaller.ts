@@ -1,3 +1,4 @@
+import { signOutHandler } from '@/helper/auth/signOut'
 import { message } from 'antd'
 import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
 import { axiosInstance } from './axiosInstance'
@@ -10,9 +11,25 @@ axiosInstance.interceptors.response.use(
     return response
   },
   (error: AxiosError<{ message: string }>) => {
-    if (error.response?.status === 401) {
+    const errorStatus = error.response?.status
+    const errorMessage = error.response?.data?.message
+
+    switch (errorStatus) {
+      case 401:
+        signOutHandler()
+        break
+      case 400:
+        message.error(errorMessage)
+        break
+
+      case 500:
+        message.error('internal server error')
+        break
+
+      default:
+        message.error('something went wrong')
+        break
     }
-    if (error.response?.status === 400) message.error(error?.response?.data?.message!)
 
     return Promise.reject(error)
   },
